@@ -209,7 +209,10 @@ bool NginxConfigParser::Parse(std::istream* config_file, NginxConfig* config) {
         break;
       }
       config_stack.pop();
-    } else if (token_type == TOKEN_TYPE_EOF && start_block_counter == end_block_counter) {
+    } else if (token_type == TOKEN_TYPE_EOF) {
+      if (start_block_counter != end_block_counter){
+        break;
+      }
       if (last_token_type != TOKEN_TYPE_STATEMENT_END &&
           last_token_type != TOKEN_TYPE_END_BLOCK) {
         // Error.

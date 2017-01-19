@@ -10,7 +10,7 @@ TEST(NginxConfigParserTest, SimpleConfig) {
   EXPECT_TRUE(success);
 }
 
-//Fixture implemented
+
 class NginxStringConfigParserTest : public ::testing::Test{
 protected:
 bool ParseString (const std::string config_string){
@@ -25,8 +25,12 @@ TEST_F(NginxStringConfigParserTest, NotEmpty){
   EXPECT_FALSE(ParseString(""));
 }
 
-TEST_F(NginxStringConfigParserTest, MissingNestedParanthesis){
+TEST_F(NginxStringConfigParserTest, MissingParanthesis){
   EXPECT_FALSE(ParseString("fambli {fubli fibli;"));
+}
+
+TEST_F(NginxStringConfigParserTest, MissingNestedParanthesis){
+  EXPECT_FALSE(ParseString("{fambli {fubli} fibli;"));
 }
 
 TEST_F(NginxStringConfigParserTest, SpaceOkay){
